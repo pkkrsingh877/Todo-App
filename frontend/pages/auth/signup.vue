@@ -62,6 +62,7 @@
 import { ref } from 'vue';
 const router = useRouter();
 const name = ref('');
+const username = ref('');
 const email = ref('');
 const password = ref('');
 
@@ -81,7 +82,7 @@ const handleSignup = async (e) => {
         }),
         credentials: 'include'
     });
-    router.push('/notes');
+    router.push('/todos');
 }
 </script>
 

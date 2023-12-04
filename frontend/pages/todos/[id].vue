@@ -1,23 +1,23 @@
 <template>
     <div class="container">
         <div class="section">
-            <div v-if="note.length === 0">No notes available.</div>
+            <div v-if="todo.length === 0">No todos available.</div>
             <div v-else>
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            {{ note.title }}
+                            {{ todo.title }}
                         </p>
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            {{ note.description }}
+                            {{ todo.description }}
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a :href="`/notes/${note._id}`" class="card-footer-item">View</a>
-                        <a :href="`/notes/edit/${note._id}`" class="card-footer-item">Edit</a>
-                        <a @click="deleteNote(note._id)" class="card-footer-item">Delete</a>
+                        <a :href="`/todos/${todo._id}`" class="card-footer-item">View</a>
+                        <a :href="`/todos/edit/${todo._id}`" class="card-footer-item">Edit</a>
+                        <a @click="deleteTodo(todo._id)" class="card-footer-item">Delete</a>
                     </footer>
                 </div>
             </div>
@@ -28,13 +28,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const note = ref('');
+const todo = ref('');
 const router = useRouter();
 
-const fetchNote = async () => {
+const fetchTodo = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`http://localhost:8000/notes/${id}`, {
+        const response = await fetch(`http://localhost:8000/todos/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,18 +44,18 @@ const fetchNote = async () => {
         });
         const data = await response.json();
         if (data.message !== 'Unauthorized: No token provided') {
-            note.value = data;
+            todo.value = data;
         }
     } catch (error) {
-        console.error('Error fetching notes:', error);
+        console.error('Error fetching todos:', error);
     }
 };
 
-onMounted(fetchNote);
+onMounted(fetchTodo);
 
-const deleteNote = async (id) => {
+const deleteTodo = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8000/notes/${id}`, {
+        const response = await fetch(`http://localhost:8000/todos/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const deleteNote = async (id) => {
         const data = await response.json();
         router.push('/');
     } catch (error) {
-        console.error('Error deleting notes:', error);
+        console.error('Error deleting todos:', error);
     }
 };
 </script>

@@ -6,7 +6,7 @@
 
 <script setup>
 const router = useRouter();
-router.push('/notes');
+router.push('/todos');
 </script>
 
 <style scoped></style>

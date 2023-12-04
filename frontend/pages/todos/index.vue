@@ -2,7 +2,7 @@
     <div class="container">
         <div class="section">
             <div v-if="notes.length === 0">
-                No notes available.
+                No todos available.
             </div>
             <div v-else>
                 <div v-for="note in notes" :key="note._id">

@@ -38,7 +38,7 @@ app.use('/auth', authRoutes);
 
 const databaseSetup = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/notesapp');
+        await mongoose.connect('mongodb://127.0.0.1:27017/todosapp');
         console.log('DB Connection Successful');
     } catch (error) {
         console.log(error);

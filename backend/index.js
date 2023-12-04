@@ -27,14 +27,12 @@ app.use(cors({
 const verifyUser = require('./middlewares/verifyUser');
 
 // Files for Route Handlers
-const todoRoutes = require('./routes/todo');
+const todoRoutes = require('./routes/todos');
 const authRoutes = require('./routes/auth');
-// const userRoutes = require('./routes/users');
 
 // Middleware for Routes
 app.use('/todos', verifyUser, todoRoutes);
 app.use('/auth', authRoutes);
-// app.use('/user', userRoutes);
 
 // Database setup
 

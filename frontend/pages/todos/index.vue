@@ -62,7 +62,11 @@ const deleteNote = async (id) => {
             },
             credentials: 'include'
         });
-        todos.value.splice(id, 1);
+        if (response.ok) {
+            todos.value = todos.value.filter(todo => todo._id !== id);
+        } else {
+            console.error('Failed to delete todo. Server response:', response);
+        }
     } catch (error) {
         console.error('Error deleting todos:', error);
     }
